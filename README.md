@@ -1,23 +1,62 @@
-# The Game Of Life
+# Game of Life - Python Project
 
-Rendering engine for watching Life patterns evolve, created with Python 2.6 and
-PyGame.
+## Description
 
-* Implements the HashLife algorithm, so patterns can be viewed at super-linear
-speeds with moderate requirements.
-* Can load basic .lif and .cells files, for easy use.
+The **Game of Life** project implements John Conway's famous cellular automaton, using a representation of a world of cells and the rules that govern their evolution. This project makes it possible to run the game of life on a grid of cells and simulate its evolution over several generations.
 
-## Dependencies
-* Python 2 (2.6 or 2.7)
-* Pygame (`pip install pygame`)
+## Prerequisites
+
+Before you start, make sure you have the following installed:
+
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Poetry](https://python-poetry.org/docs/#installation) for dependency and script management
 
 ## Installation
-1. Run the following commands :
-```
-git clone https://github.com/EricBurnett/GameOfLife.git
-cd GameOfLife
-python2.6 life.py
-```
+
+To install the project and its dependencies, follow the steps below:
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/EricBurnett/GameOfLife.git
+   cd GameOfLife
+
+2. Install dependencies using Poetry :
+
+   ```bash
+   poetry install
+
+## Tests
+To run unit tests on the project, follow the steps below:
+
+- Make sure you have installed all dependencies with poetry install as described above.
+- Run the tests with Poetry and pytest :
+   ```bash
+   poetry run pytest
+
+## Project execution
+To run the project and watch the game in action, you can use the project's life.py code.
+    ```bash
+   cd gameoflife
+   poetry run python life.py
+
+## Building a package
+To generate a project package (for example, a .tar.gz or .whl file), you can use the following command:
+    ```bash
+    poetry build
+The generated files will be placed in the project's dist/ folder.
+
+## Version Control
+- To increase the minor version :
+    ```bash
+    poetry version minor
+- To increase the major version :
+    ```bash
+    poetry version major
+- To upgrade the patch :
+    ```bash
+    poetry version patch
+
 
 ## Controls
 
