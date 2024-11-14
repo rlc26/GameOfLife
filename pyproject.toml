@@ -11,6 +11,11 @@ python = ">=3.8.1,<4.0"
 pygame = "*"
 
 
+repository = "https://github.com/rlc26/GameOfLife"
+main file = "https://github.com/rlc26/GameOfLife/game-of-life/life.py" 
+test file = "https://github.com/rlc26/GameOfLife/game-of-life/test_life.py" 
+keywords = ["game of life", "conway", "cellular automaton", "simulation"]
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
 flake8 = "^7.1.1"
