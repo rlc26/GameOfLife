@@ -8,7 +8,7 @@ The **Game of Life** project implements John Conway's famous cellular automaton,
 
 Before you start, make sure you have the following installed:
 
-- [Python 3.8+](https://www.python.org/downloads/)
+- [Python 3.9+](https://www.python.org/downloads/)
 - [Poetry](https://python-poetry.org/docs/#installation) for dependency and script management
 
 ## Installation
