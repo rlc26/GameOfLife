@@ -26,16 +26,20 @@ To install the project and its dependencies, follow the steps below:
    ```bash
    poetry install
 
-## static code analysis
+## Static Code Analysis and Testing
 To ensure the quality and correctness of the project, you can run unit tests, doctests, and lint checks. Follow the steps below:
 
 - Make sure you have installed all dependencies with poetry install as described above.
-- Run Unit Tests with Poetry and pytest :
+- Unit Testing :
    ```bash
    poetry run pytest
-- Run Doctests : 
+- Doctests :
    ```bash
    poetry run python -m doctest -v life.py
+- Linting :
+   ```bash
+  poetry run pylint test
+
 
 
 ## Project execution
