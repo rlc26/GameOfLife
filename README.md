@@ -40,14 +40,16 @@ To ensure the quality and correctness of the project, you can run unit tests, do
 
 ## Project execution
 To run the project and watch the game in action, you can use the project's life.py code.
-    ```bash
-   cd gameoflife
-   poetry run python life.py
+```bash
+cd gameoflife
+poetry run python life.py
+```
 
 ## Building a package
 To generate a project package (for example, a .tar.gz or .whl file), you can use the following command:
 ```bash
 poetry build
+```
 The generated files will be placed in the project's dist/ folder.
 
 ## Version Control
