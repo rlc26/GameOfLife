@@ -26,13 +26,17 @@ To install the project and its dependencies, follow the steps below:
    ```bash
    poetry install
 
-## Tests
-To run unit tests on the project, follow the steps below:
+## static code analysis
+To ensure the quality and correctness of the project, you can run unit tests, doctests, and lint checks. Follow the steps below:
 
 - Make sure you have installed all dependencies with poetry install as described above.
-- Run the tests with Poetry and pytest :
+- Run Unit Tests with Poetry and pytest :
    ```bash
    poetry run pytest
+- Run Doctests : 
+   ```bash
+   poetry run python -m doctest -v life.py
+
 
 ## Project execution
 To run the project and watch the game in action, you can use the project's life.py code.
