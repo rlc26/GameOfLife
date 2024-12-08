@@ -46,8 +46,8 @@ To run the project and watch the game in action, you can use the project's life.
 
 ## Building a package
 To generate a project package (for example, a .tar.gz or .whl file), you can use the following command:
-    ```bash
-    poetry build
+```bash
+poetry build
 The generated files will be placed in the project's dist/ folder.
 
 ## Version Control
