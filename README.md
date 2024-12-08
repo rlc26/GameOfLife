@@ -8,7 +8,7 @@ The **Game of Life** project implements John Conway's famous cellular automaton,
 
 Before you start, make sure you have the following installed:
 
-- [Python 3.8+](https://www.python.org/downloads/)
+- [Python 3.9+](https://www.python.org/downloads/)
 - [Poetry](https://python-poetry.org/docs/#installation) for dependency and script management
 
 ## Installation
@@ -26,24 +26,40 @@ To install the project and its dependencies, follow the steps below:
    ```bash
    poetry install
 
-## Tests
-To run unit tests on the project, follow the steps below:
+## Static Code Analysis and Testing
+To ensure the quality and correctness of the project, you can run unit tests, doctests, and lint checks. Follow the steps below:
 
 - Make sure you have installed all dependencies with poetry install as described above.
-- Run the tests with Poetry and pytest :
+- Unit Testing :
    ```bash
    poetry run pytest
+- Doctests :
+   ```bash
+   poetry run python -m doctest -v life.py
+- Linting :
+   ```bash
+  poetry run pylint test
+- Automatically check and fix common issues before code is committed :
+  ```bash
+  # Install pre-commit hooks
+  pre-commit install
+  # Optionally, run hooks on all files to ensure compliance
+  pre-commit run --all-files
+  ```
+
 
 ## Project execution
 To run the project and watch the game in action, you can use the project's life.py code.
-    ```bash
-   cd gameoflife
-   poetry run python life.py
+```bash
+cd gameoflife
+poetry run python life.py
+```
 
 ## Building a package
 To generate a project package (for example, a .tar.gz or .whl file), you can use the following command:
-    ```bash
-    poetry build
+```bash
+poetry build
+```
 The generated files will be placed in the project's dist/ folder.
 
 ## Version Control
