@@ -8,30 +8,30 @@ need appropriate headers stuck on.
 """
 
 import sys
-from life import *
+from .life import *
 
 def TestNoNodeConstructor():
   try:
     n = Node(1, 1, 1, 1, 1)
-  except UsageError, e:
+  except UsageError as e:
     return True
   else:
     assert "Constructor should have thrown!"
 
 def BasicTests():
   box = Node.CanonicalNode(1, 1, 1, 1, 1)
-  print "box", box
+  print ("box", box)
   exp = box.Expand()
-  print "exp", exp
+  print ("exp", exp)
   exp2 = exp._Forward()
-  print "exp2", exp2
+  print ("exp2", exp2)
   expexp = exp.Expand()
-  print "expexp", expexp
+  print ("expexp", expexp)
   expexp2 = expexp._Forward()
-  print "expexp2", expexp2
+  print ("expexp2", expexp2)
   assert expexp2 == box.Expand()
   expexp3 = expexp2._Forward()
-  print "expexp3", expexp3
+  print ("expexp3", expexp3)
   assert expexp3 == box
   assert expexp3.Canonical() == box.Canonical()
   return True
@@ -96,8 +96,8 @@ if __name__ == "__main__":
       TestInnerBounds() and
       TestBlinker() and
       TestPerformance()):
-    print "All Tests Passed"
+    print ("All Tests Passed")
     sys.exit(0)
   else:
-    print "Test failed!"
+    print ("Test failed!")
     sys.exit(1)

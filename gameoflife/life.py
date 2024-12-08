@@ -80,10 +80,10 @@ class Node:
     numNodesConstructed += 1
     self._level = level
     if (level == 1):
-      assert nw is 1 or nw is 0
-      assert ne is 1 or ne is 0
-      assert sw is 1 or sw is 0
-      assert se is 1 or se is 0
+      assert nw == 1 or nw == 0
+      assert ne == 1 or ne == 0
+      assert sw == 1 or sw == 0
+      assert se == 1 or se == 0
       pass
     else:
       assert nw._level == ne._level == sw._level == se._level == level - 1
@@ -113,6 +113,13 @@ class Node:
     return cache[self]
 
   def IsCanonical(self):
+    """
+    Checks if the node is in its canonical form.
+
+    >>> node = Node.CanonicalNode(1, 0, 0, 1, 1)
+    >>> node.IsCanonical()
+    True
+    """
     return id(self) == id(self.Canonical())
 
   def __hash__(self):
@@ -159,7 +166,14 @@ class Node:
     return zero == self
 
   def Expand(self):
-    """Returns a node one level deeper, with the center being this node."""
+    """
+    Expands the node into its next generation.
+
+    >>> box = Node.CanonicalNode(1, 1, 1, 1, 1)
+    >>> expanded = box.Expand()
+    >>> expanded == box  # Checking that the result is canonical
+    True
+    """
     zero = Node.Zero(self._level - 1)
     nw = self.CanonicalNode(self._level, nw=zero, ne=zero, sw=zero, se=self._nw)
     ne = self.CanonicalNode(self._level, nw=zero, ne=zero, sw=self._ne, se=zero)
@@ -442,10 +456,15 @@ class World:
 
   @classmethod
   def _InnerBounds(self, bounds, index):
-    """Helper method for NodeFromPositionsAndBounds - returns the quadrant of
-    the bounds that corresponds to the given index. So for bounds [3, 6, 10, 13]
-    the return values are 0:[3, 4, 12, 13], 1:[5, 6, 12, 13], 2:[3, 4, 10, 11],
-      3:[5, 6, 10, 11].
+    """
+    Calculate the inner bounds of a region at a given depth.
+
+    >>> World._InnerBounds((1, 4, 3, 6), 0)
+    (1, 2, 5, 6)
+    >>> World._InnerBounds((1, 4, 3, 6), 1)
+    (3, 4, 5, 6)
+    >>> World._InnerBounds((1, 4, 3, 6), 3)
+    (3, 4, 3, 4)
     """
     size = bounds[1] - bounds[0] + 1
     assert bounds[2] + size - 1 == bounds[3]
@@ -606,10 +625,25 @@ class Game:
 
 
 def ParseFile(name):
-  """Load a file. We support pretty lax syntax; ! or # start a comment, . on a
+  """
+  Load a file. We support pretty lax syntax; ! or # start a comment, . on a
   line is a dead cell, anything else is live. Line lengths do not need to
   match. This can load basic .cells and .lif files, although nothing complicated
   is supported.
+
+  >>> with open('test.cells', 'w') as f:
+  ...     f.write('! Comment line\\n')
+  ...     f.write('..O\\n')
+  ...     f.write('O.O\\n')
+  ...     f.write('...\\n')
+  >>> ParseFile('test.cells')
+  [(0, 2), (1, 0), (1, 2)]
+
+  >>> with open('empty.cells', 'w') as f:
+  ...     f.write('! Only comments\\n')
+  >>> ParseFile('empty.cells')
+  []
+
   """
   with open(name) as f:
     result = []
