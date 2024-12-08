@@ -39,7 +39,13 @@ To ensure the quality and correctness of the project, you can run unit tests, do
 - Linting :
    ```bash
   poetry run pylint test
-
+- Automatically check and fix common issues before code is committed :
+  ```bash
+  # Install pre-commit hooks
+  pre-commit install
+  # Optionally, run hooks on all files to ensure compliance
+  pre-commit run --all-files
+  ```
 
 
 ## Project execution
