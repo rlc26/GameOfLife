@@ -863,53 +863,52 @@ class Game:
     def ProcessEvent(self, event):
         """Handle a single 'event' - like a key press, mouse click, etc."""
         logging.debug(f"Processing event: {event}")
-        if event.type == pygame.QUIT:
-            logging.info("Quit event received, exiting.")
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if (event.key == K_DOWN or event.key == K_UP or
-                event.key == K_LEFT or event.key == K_RIGHT):
-                # Pan.
-                logging.info(f"Panning view with key {event.key}")
-                self._world.ShiftView(event.key, max(self._width, self._height) // 20)
-            elif event.key == K_MINUS or event.key == K_KP_MINUS:
-                # Slow down.
-                if self._generations_per_update > 1:
-                    self._generations_per_update >>= 1
-                    logging.info(f"Reduced generations per update to {self._generations_per_update}")
-                else:
-                    self._ticks_per_update <<= 1
-                    logging.info(f"Increased ticks per update to {self._ticks_per_update}")
-            elif event.key == K_EQUALS or event.key == K_KP_PLUS:
-                # Speed up.
-                if self._ticks_per_update > 1:
-                    self._ticks_per_update >>= 1
-                    logging.info(f"Reduced ticks per update to {self._ticks_per_update}")
-                else:
-                    self._generations_per_update <<= 1
-                    logging.info(f"Increased generations per update to {self._generations_per_update}")
-            elif event.key == K_SPACE:
-                # Pause.
-                self._paused = not self._paused
-                logging.info(f"Paused set to {self._paused}")
-            elif event.key == K_PAGEDOWN:
-                # Zoom in.
-                logging.info("Zooming in.")
-                self._world.ZoomIn()
-            elif event.key == K_PAGEUP:
-                # Zoom out.
-                logging.info("Zooming out.")
-                self._world.ZoomOut()
-            elif event.key == K_q and (pygame.key.get_mods() & KMOD_CTRL):
-                # Quit.
-                logging.info("Ctrl+Q pressed, quitting.")
+        try:
+            if event.type == pygame.QUIT:
+                logging.info("Quit event received, exiting.")
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if (event.key == K_DOWN or event.key == K_UP or
+                    event.key == K_LEFT or event.key == K_RIGHT):
+                    logging.info(f"Panning view with key {event.key}")
+                    self._world.ShiftView(event.key, max(self._width, self._height) // 20)
+                elif event.key == K_MINUS or event.key == K_KP_MINUS:
+                    if self._generations_per_update > 1:
+                        self._generations_per_update >>= 1
+                        logging.info(f"Reduced generations per update to {self._generations_per_update}")
+                    else:
+                        self._ticks_per_update <<= 1
+                        logging.warning(f"Ticks per update reached a high value: {self._ticks_per_update}")
+                elif event.key == K_EQUALS or event.key == K_KP_PLUS:
+                    if self._ticks_per_update > 1:
+                        self._ticks_per_update >>= 1
+                        logging.info(f"Reduced ticks per update to {self._ticks_per_update}")
+                    else:
+                        self._generations_per_update <<= 1
+                        logging.info(f"Increased generations per update to {self._generations_per_update}")
+                elif event.key == K_SPACE:
+                    self._paused = not self._paused
+                    logging.info(f"Paused set to {self._paused}")
+                elif event.key == K_PAGEDOWN:
+                    logging.info("Zooming in.")
+                    self._world.ZoomIn()
+                elif event.key == K_PAGEUP:
+                    logging.info("Zooming out.")
+                    self._world.ZoomOut()
+                elif event.key == K_q and (pygame.key.get_mods() & KMOD_CTRL):
+                    logging.info("Ctrl+Q pressed, quitting.")
+                    sys.exit()
+        except Exception as e:
+            logging.critical(f"Unexpected error in ProcessEvent: {e}", exc_info=True)
 
     def Draw(self):
         logging.debug("Drawing the screen.")
         self._screen.fill((255, 255, 255))  # White
-        self._world.Draw(self._width, self._height, self._screen)
-        pygame.display.flip()
+        try:
+            self._world.Draw(self._width, self._height, self._screen)
+            pygame.display.flip()
+        except Exception as e:
+            logging.critical(f"Failed to draw the world: {e}", exc_info=True)
 
     def Tick(self):
         """Update the game state based on the tick."""
@@ -920,21 +919,26 @@ class Game:
             self._ticks_till_next -= 1
             logging.debug(f"Ticks till next update: {self._ticks_till_next}")
         else:
-            logging.debug("Iterating the world.")
-            self._world.Iterate(self._generations_per_update)
-            self._ticks_till_next = self._ticks_per_update
-            logging.info(f"Updated game state, generations per update: {self._generations_per_update}")
+            try:
+                logging.debug("Iterating the world.")
+                self._world.Iterate(self._generations_per_update)
+                self._ticks_till_next = self._ticks_per_update
+                logging.info(f"Updated game state, generations per update: {self._generations_per_update}")
+            except Exception as e:
+                logging.critical(f"Failed to update the world state: {e}", exc_info=True)
 
     def RunGameLoop(self):
         logging.info("Starting game loop.")
-        while True:
-            for event in pygame.event.get():
-                self.ProcessEvent(event)
+        try:
+            while True:
+                for event in pygame.event.get():
+                    self.ProcessEvent(event)
 
-            self._clock.tick(30)
-            self.Tick()
-            self.Draw()
-
+                self._clock.tick(30)
+                self.Tick()
+                self.Draw()
+        except Exception as e:
+            logging.critical(f"Unexpected error in game loop: {e}", exc_info=True)
 
 def ParseFile(name):
     """
@@ -965,7 +969,9 @@ def ParseFile(name):
     except FileNotFoundError:
         logging.error(f"File {name} not found.")
         return []
-
+    except Exception as e:
+        logging.critical(f"Failed to parse file: {e}", exc_info=True)
+        return []
 
 def main():
     logging.info("Initializing Pygame.")
@@ -979,9 +985,11 @@ def main():
         logging.info("Using default initial state.")
         initial_state = [(-2, -2), (-2, -1), (-2, 2), (-1, -2), (-1, 1), (0, -2), (0, 1),
                          (0, 2), (1, 0), (2, -2), (2, 0), (2, 1), (2, 2)]
-    game = Game(size, World(initial_state))
-    game.RunGameLoop()
-
+    try:
+        game = Game(size, World(initial_state))
+        game.RunGameLoop()
+    except Exception as e:
+        logging.critical(f"Failed to start the game: {e}", exc_info=True)
 
 if __name__ == "__main__":
     main()
