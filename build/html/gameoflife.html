@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gameoflife package &#8212; Game of Life 2011 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=9ab6362a"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lint_script module" href="lint_script.html" />
+    <link rel="prev" title="GameOfLife" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="gameoflife-package">
+<h1>gameoflife package<a class="headerlink" href="#gameoflife-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-gameoflife.life">
+<span id="gameoflife-life-module"></span><h2>gameoflife.life module<a class="headerlink" href="#module-gameoflife.life" title="Link to this heading">¶</a></h2>
+<p>Created on Mon Feb 21 09:17:10 2011</p>
+<p>&#64;author: Eric Burnett (<a class="reference external" href="mailto:ericburnett&#37;&#52;&#48;gmail&#46;com">ericburnett<span>&#64;</span>gmail<span>&#46;</span>com</a>)
+Released under the LGPL (or most other licenses on demand) - contact me if you
+need appropriate headers stuck on.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="gameoflife.life.Game">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">world</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Game" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Game.Draw">
+<span class="sig-name descname"><span class="pre">Draw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Game.Draw" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Game.ProcessEvent">
+<span class="sig-name descname"><span class="pre">ProcessEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Game.ProcessEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Handle a single ‘event’ - like a key press, mouse click, etc.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Game.RunGameLoop">
+<span class="sig-name descname"><span class="pre">RunGameLoop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Game.RunGameLoop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Game.Tick">
+<span class="sig-name descname"><span class="pre">Tick</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Game.Tick" title="Link to this definition">¶</a></dt>
+<dd><p>Update the game state based on the tick.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gameoflife.life.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">really_use_constructor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Node represents a square 2^N x 2^N cluster of cells.</p>
+<p>The Node class is based on the description of the HashLife algorithm found
+at <a class="reference external" href="http://drdobbs.com/high-performance-computing/184406478">http://drdobbs.com/high-performance-computing/184406478</a>. It is a hash tree
+with aggressive caching and de-duplication. In particular:</p>
+<ul class="simple">
+<li><p>Nodes are defined recursively, with <cite>_nw</cite>, <cite>_ne</cite>, <cite>_sw</cite>, and <cite>_se</cite> being Nodes
+representing the 2^(N-1) x 2^(N-1) cells in a particular corner ([0|1] at
+the leaves).</p></li>
+<li><p>Nodes are immutable. Once a Node is returned from <cite>Node.CanonicalNode()</cite>, the
+cells represented are guaranteed not to change.</p></li>
+<li><p>Nodes are unique. They are constructed in such a way that no two Node
+objects can represent the same configuration of cells. In particular, this
+means that Nodes can be compared by equality by doing <cite>id(a) == id(b)</cite>. This
+means that most node hierarchies take far less than 2^(2N) space to store.</p></li>
+<li><p>One key operation on a Node is to return the inner core 2^(N-1) x 2^(N-1)
+cells forward a number of generations (usually 2^(N-2)). This is cached
+wherever possible, and, along with identical nodes being shared due to their
+uniqueness, means calculating the future inner core of a Node is usually far
+cheaper than the worst-case 2^(2N) operation.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Canonical">
+<span class="sig-name descname"><span class="pre">Canonical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dont_touch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Canonical" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the canonical variant of a node, hopefully with a cached center.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.CanonicalNode">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CanonicalNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.CanonicalNode" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a canonical version of a new node. Should always be used, never
+the base constructor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Compact">
+<span class="sig-name descname"><span class="pre">Compact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Compact" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the smallest node (level &gt;= 1) that will contain all the cells
+(without shifting the center).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Draw">
+<span class="sig-name descname"><span class="pre">Draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">draw_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Draw" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the cells within this Node that fall within bounds. Before offset,
+the cell upper-right of center is 0,0. The offsetted coordinates of ‘on’
+cells are passed to draw_func for the actual rendering.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Expand">
+<span class="sig-name descname"><span class="pre">Expand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Expand" title="Link to this definition">¶</a></dt>
+<dd><p>Expands the node into its next generation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">box</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">CanonicalNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expanded</span> <span class="o">=</span> <span class="n">box</span><span class="o">.</span><span class="n">Expand</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expanded</span> <span class="o">==</span> <span class="n">box</span>  <span class="c1"># Checking that the result is canonical</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.ForwardN">
+<span class="sig-name descname"><span class="pre">ForwardN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.ForwardN" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a Node pointer, representing these cells forward n generations.
+It will automatically expand to be big enough to fit all cells.
+The most compact node centered at the appropriate location that contains
+all the cells is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.IsCanonical">
+<span class="sig-name descname"><span class="pre">IsCanonical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.IsCanonical" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the node is in its canonical form.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="o">.</span><span class="n">CanonicalNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">IsCanonical</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.IsZero">
+<span class="sig-name descname"><span class="pre">IsZero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.IsZero" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.MergeCenter">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MergeCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ne</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.MergeCenter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.MergeHorizontal">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MergeHorizontal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.MergeHorizontal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.MergeVertical">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MergeVertical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.MergeVertical" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Raw">
+<span class="sig-name descname"><span class="pre">Raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Raw" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the raw value of a cell at the given index.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Raw</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Sum">
+<span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Sum" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sum of specific sections of a level-1 node, subtracting
+the value at ‘index’.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.SumBottom">
+<span class="sig-name descname"><span class="pre">SumBottom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.SumBottom" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sum of the bottom cells.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SumBottom</span><span class="p">()</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.SumLeft">
+<span class="sig-name descname"><span class="pre">SumLeft</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.SumLeft" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sum of the left cells.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SumLeft</span><span class="p">()</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.SumRight">
+<span class="sig-name descname"><span class="pre">SumRight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.SumRight" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sum of the right cells.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SumRight</span><span class="p">()</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.SumTop">
+<span class="sig-name descname"><span class="pre">SumTop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.SumTop" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sum of the top cells.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Node</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">SumTop</span><span class="p">()</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.Node.Zero">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_dont_touch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.Node.Zero" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a node tree of all zeroes at the specified level.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life.ParseFile">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">ParseFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.ParseFile" title="Link to this definition">¶</a></dt>
+<dd><p>Load a file. We support pretty lax syntax; ! or # start a comment, . on a
+line is a dead cell, anything else is live. Line lengths do not need to
+match. This can load basic .cells and .lif files, although nothing complicated
+is supported.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="gameoflife.life.UsageError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">UsageError</span></span><a class="headerlink" href="#gameoflife.life.UsageError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Custom error for invalid use of Node class.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gameoflife.life.World">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">World</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manages the world of cells, infinite in size.</p>
+<p>Handles drawing, iteration, and tracking various statistics about what is
+happening.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.Draw">
+<span class="sig-name descname"><span class="pre">Draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">screen_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">screen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.Draw" title="Link to this definition">¶</a></dt>
+<dd><p>Draws the current world to the screen. Uses self._view_center and
+self._view_size to specify the location and zoom level.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.FillNode">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FillNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.FillNode" title="Link to this definition">¶</a></dt>
+<dd><p>Turns a set of positions into a node hierarchy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.Iterate">
+<span class="sig-name descname"><span class="pre">Iterate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_generations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.Iterate" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the state of the current world by n generations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.ShiftView">
+<span class="sig-name descname"><span class="pre">ShiftView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.ShiftView" title="Link to this definition">¶</a></dt>
+<dd><p>Shifts the current view by a number of screen pixels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.ZoomIn">
+<span class="sig-name descname"><span class="pre">ZoomIn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.ZoomIn" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gameoflife.life.World.ZoomOut">
+<span class="sig-name descname"><span class="pre">ZoomOut</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.World.ZoomOut" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life.main">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-gameoflife.life_test">
+<span id="gameoflife-life-test-module"></span><h2>gameoflife.life_test module<a class="headerlink" href="#module-gameoflife.life_test" title="Link to this heading">¶</a></h2>
+<p>Created on Sat Apr 2 14:05:10 2011</p>
+<p>&#64;author: Eric Burnett (<a class="reference external" href="mailto:ericburnett&#37;&#52;&#48;gmail&#46;com">ericburnett<span>&#64;</span>gmail<span>&#46;</span>com</a>)
+Released under the LGPL (or most other licenses on demand) - contact me if you
+need appropriate headers stuck on.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_basic">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_basic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_basic" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_blinker">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_blinker</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_blinker" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_fill_node">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_fill_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_fill_node" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_inner_bounds">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_inner_bounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_inner_bounds" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_no_node_constructor">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_no_node_constructor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_no_node_constructor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gameoflife.life_test.test_performance">
+<span class="sig-prename descclassname"><span class="pre">gameoflife.life_test.</span></span><span class="sig-name descname"><span class="pre">test_performance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gameoflife.life_test.test_performance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-gameoflife">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gameoflife" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Game of Life</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">GameOfLife</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">gameoflife package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lint_script.html">lint_script module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">GameOfLife</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">GameOfLife</a></li>
+      <li>Next: <a href="lint_script.html" title="next chapter">lint_script module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Eric Burnett,Romane.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/gameoflife.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

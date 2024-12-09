@@ -32,26 +32,32 @@ class UsageError(RuntimeError):
 
 ################################################################################
 class Node:
-    """A Node represents a square 2^N x 2^N cluster of cells.
+    """
+    A Node represents a square 2^N x 2^N cluster of cells.
 
     The Node class is based on the description of the HashLife algorithm found
     at http://drdobbs.com/high-performance-computing/184406478. It is a hash tree
     with aggressive caching and de-duplication. In particular:
-    * Nodes are defined recursively, with _nw, _ne, _sw, and _se being Nodes
+
+    - Nodes are defined recursively, with `_nw`, `_ne`, `_sw`, and `_se` being Nodes
       representing the 2^(N-1) x 2^(N-1) cells in a particular corner ([0|1] at
       the leaves).
-    * Nodes are immutable. Once a Node is returned from Node.CanonicalNode(), the
+
+    - Nodes are immutable. Once a Node is returned from `Node.CanonicalNode()`, the
       cells represented are guaranteed not to change.
-    * Nodes are unique. They are constructed in such a way that no two Node
+
+    - Nodes are unique. They are constructed in such a way that no two Node
       objects can represent the same configuration of cells. In particular, this
-      means that Nodes can be compared by equality by doing id(a)==id(b). This
+      means that Nodes can be compared by equality by doing `id(a) == id(b)`. This
       means that most node hierarchies take far less than 2^(2N) space to store.
-    * One key operation on a Node is to return the inner core 2^(N-1) x 2^(N-1)
+
+    - One key operation on a Node is to return the inner core 2^(N-1) x 2^(N-1)
       cells forward a number of generations (usually 2^(N-2)). This is cached
       wherever possible, and, along with identical nodes being shared due to their
       uniqueness, means calculating the future inner core of a Node is usually far
-      cheaper than the worst case 2^(2N) operation.
+      cheaper than the worst-case 2^(2N) operation.
     """
+
 
     @classmethod
     def CanonicalNode(cls, level, nw, ne, sw, se):
