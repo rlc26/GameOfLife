@@ -84,8 +84,12 @@ PageDown/PageUp: Zoom in/out
 
 ## Credits
 
-Game of Life, copyright Eric Burnett, 2011.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-All code available under the LGPL (or most other licenses you might want).
+The full text of the GNU Lesser General Public License is included in the LICENSE file accompanying this program.
 
-Contact me if you need me to stuff on appropriate headers.
+Copyright (c) 2011 Eric Burnett.
+Fork modifications (c) 2024 Romane.
