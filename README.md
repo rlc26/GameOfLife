@@ -64,6 +64,17 @@ To ensure the quality and correctness of the project, follow the steps below:
   pre-commit run --all-files
   ```
 
+## Generating the Documentation
+
+This project uses Sphinx to generate reference documentation from Python docstrings. Follow the steps below to generate the documentation:
+1. Install the project dependencies, including Sphinx:
+   ```bash
+   poetry install
+2. Generate the HTML documentation :
+   ```bash
+   poetry run make html
+   ```
+The generated documentation can be found in the docs/_build/html directory. Open index.html in your browser to view it.
 
 ## License
 
