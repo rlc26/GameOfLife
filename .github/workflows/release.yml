@@ -1,34 +1,64 @@
-name: Deploy Documentation to GitHub Pages
+name: Release
 
 on:
   push:
-    branches:
-      - master 
+    tags:
+      - "v*" # Détecter uniquement les tags qui commencent par "v"
+
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
 
     steps:
+      # 1. Vérifier le dépôt
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      # 2. Installer Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.11 
 
-      - name: Install dependencies
+      # 3. Installer Poetry
+      - name: Install Poetry
         run: |
-          pip install sphinx
+          curl -sSL https://install.python-poetry.org | python3 -
+        env:
+          PATH: ${{ runner.tool_cache }}/python/${{ matrix.python-version }}/bin:${{ env.HOME }}/.local/bin:${{ env.PATH }}
 
-      - name: Build the documentation
-        run: sphinx-build -b html source source/_build/html
+      # 4. Installer les dépendances
+      - name: Install dependencies
+        run: poetry install
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      # 5. Lancer les tests
+      - name: Run tests
+        run: poetry run pytest
+
+      # 6. Générer le changelog
+      - name: Generate changelog
+        id: changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 HEAD^)
+          echo "Last tag: $LAST_TAG"
+          CHANGELOG=$(git log $LAST_TAG..HEAD --oneline --pretty=format:"- %s")
+          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+
+      # 7. Créer une release GitHub
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
         with:
-          branch: gh-pages # Branche cible pour la publication
-          folder: source/_build/html # Dossier où la documentation est générée
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: ${{ env.CHANGELOG }}
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 8. Publier les artefacts (optionnel)
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: dist
