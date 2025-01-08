@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*' # Tous les push déclenchent le workflow
+  pull_request:
+    branches:
+      - main # Les PR sur la branche main déclenchent le workflow
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10.10, 3.11] 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run linting
+        run: poetry run flake8 .
+
+      - name: Run tests
+        run: poetry run pytest --cov=gameoflife
+
